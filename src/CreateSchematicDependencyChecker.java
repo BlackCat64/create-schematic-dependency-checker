@@ -7,10 +7,9 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FilenameFilter;
-import java.util.HashMap;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CreateSchematicDependencyChecker {
     public static void main(String[] args) {
@@ -57,6 +56,9 @@ public class CreateSchematicDependencyChecker {
                         System.err.println("Found empty block ID! Skipping...");
                         continue;
                     }
+                    if (blockID.startsWith("minecraft:")) // skip vanilla blocks - minecraft doesn't count as a dependency
+                        continue;
+
                     String[] tokens = blockID.split(":");
                     if (tokens.length != 2) {
                         System.err.println("Found invalid block ID! Skipping..."); // block registry ID must contain a colon separating the mod ID from the block ID
@@ -74,7 +76,9 @@ public class CreateSchematicDependencyChecker {
             else {
                 System.out.println("Processing complete. Found " + modIDs.size() + " mods:\n");
                 System.out.println("=====DEPENDENCIES======");
-                for (String modID : modIDs) {
+
+                List<String> sortedIDs = new ArrayList<>(modIDs).stream().sorted().toList(); // sort and output the IDs of the mods used in the schematic
+                for (String modID : sortedIDs) {
                     System.out.println(modID);
                 }
             }
