@@ -40,7 +40,7 @@ public class CreateSchematicDependencyChecker {
             }
             else {
                 System.out.println("Processing complete. Found " + modIDs.size() + " mods.\n");
-                System.out.println("=====DEPENDENCIES======");
+                System.out.println("<<<DEPENDENCIES>>> of " + schematicFile.getName() + ":");
 
                 List<String> sortedIDs = new ArrayList<>(modIDs).stream().sorted().toList(); // sort and output the IDs of the mods used in the schematic
                 for (String modID : sortedIDs) {
