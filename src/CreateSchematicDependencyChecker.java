@@ -115,6 +115,7 @@ public class CreateSchematicDependencyChecker {
                 if (!blockTag.hasTag("nbt")) // ignore blocks without extra NBT data
                     continue;
 
+                // use a list filter to get the 'id' tag from the nbt tag because there is another 'id' tag further down the tree which gets returned otherwise
                 ICompoundTag blockNbtTag = blockTag.getCompound("nbt");
                 List<Tag<?>> blockNbtTags = blockNbtTag.getData();
                 ITag<?> blockNbtIDTag = blockNbtTags.stream().filter(tag -> tag.getName().equals("id")).findFirst().orElse(null);
@@ -146,15 +147,15 @@ public class CreateSchematicDependencyChecker {
                         modIDs.add(camo2ID);
                 }
                 else if (blockNbtID.contains("copycat")) {
-                    ICompoundTag copycatMaterialTag = blockNbtTag.getCompound("Material");
-                    if (copycatMaterialTag != null) { // single-state copycat blocks have this tag
+                    ICompoundTag copycatMaterialTag = blockNbtTag.getCompound("Material"); // single-state copycat blocks have this tag
+                    if (copycatMaterialTag != null) {
                         String modID = getModIDFromTag(copycatMaterialTag);
 
                         if (modID != null)
                             modIDs.add(modID);
                     }
-                    else { // handle multi-state copycat blocks
-                        copycatMaterialTag = blockNbtTag.getCompound("material_data");
+                    else {
+                        copycatMaterialTag = blockNbtTag.getCompound("material_data"); // handle multi-state copycat blocks
                         if (copycatMaterialTag == null) {
                             System.err.println("Could not find Copycat Block material tag! Skipping...");
                             continue;
@@ -172,6 +173,12 @@ public class CreateSchematicDependencyChecker {
         return modIDs;
     }
 
+    /**
+     * Retrieves the mod ID of the block inside a framed block.
+     *
+     * @param camoTag - The 'camo' or 'camo_two' tag inside a Framed Block's NBT data.
+     * @return - The mod ID of the block
+     */
     private static String getFramedBlockCamoID(ICompoundTag camoTag) {
         if (camoTag == null)
             return null;
@@ -183,6 +190,12 @@ public class CreateSchematicDependencyChecker {
         return getModIDFromTag(camoStateTag);
     }
 
+    /**
+     * Retrieves the mod IDs of the blocks used in a copycat block
+     *
+     * @param copycatMaterialTag - The 'material_data' Compound tag from a copycat block's NBT data
+     * @return - A set of mod IDs of the blocks inside the copycat block
+     */
     private static Set<String> getMultiStateCopycatBlockModIDs(ICompoundTag copycatMaterialTag) {
         if (copycatMaterialTag == null)
             return null;
@@ -191,7 +204,7 @@ public class CreateSchematicDependencyChecker {
         String[] materialTagNames = new String[] {
                 "bottom", "top", "up", "down", "left", "right", // others, just in case
                 "top_right", "top_left", "bottom_right", "bottom_left", // byte panel
-                "north", "south", "east", "west", // box / catwalk
+                "north", "south", "east", "west", // box / catwalk / board
                 "top_southeast", "top_northeast", "top_southwest", "top_northwest", // byte
                 "bottom_southeast", "bottom_northeast", "bottom_southwest", "bottom_northwest",
                 "positive_layers", "negative_layers" // half layers
@@ -225,6 +238,12 @@ public class CreateSchematicDependencyChecker {
         return modIDs;
     }
 
+    /**
+     * Retrieves only the mod ID from an NBT Compound tag containing a block registry ID in a String tag
+     *
+     * @param tag - Compound tag containing a String tag called 'Name' which contains a block registry ID
+     * @return - The mod ID of the block
+     */
     private static String getModIDFromTag(ICompoundTag tag) {
         if (tag == null)
             return null;
