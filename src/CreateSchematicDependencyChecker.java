@@ -85,10 +85,8 @@ public class CreateSchematicDependencyChecker {
             if (block instanceof ICompoundTag blockTag) {
                 String modID = getModIDFromTag(blockTag);
 
-                if (modID.equals("minecraft")) // skip vanilla blocks - minecraft doesn't count as a dependency
-                    continue;
-
-                modIDs.add(modID); // add the mod ID to the set
+                if (modID != null && !modID.equals("minecraft")) // skip vanilla blocks - minecraft doesn't count as a dependency
+                    modIDs.add(modID); // add the mod ID to the set
             }
             else System.err.println("Found block entry which is not a CompoundTag. Skipping..." );
         }
@@ -138,12 +136,12 @@ public class CreateSchematicDependencyChecker {
                 else if (blockNbtID.startsWith("framedblocks")) {
                     ICompoundTag camo1 = blockNbtTag.getCompound("camo");
                     String camo1ID = getFramedBlockCamoID(camo1);
-                    if (camo1ID != null)
+                    if (camo1ID != null && !camo1ID.equals("minecraft"))
                         modIDs.add(camo1ID);
 
                     ICompoundTag camo2 = blockNbtTag.getCompound("camo_two");
                     String camo2ID = getFramedBlockCamoID(camo2);
-                    if (camo2ID != null)
+                    if (camo2ID != null && !camo2ID.equals("minecraft"))
                         modIDs.add(camo2ID);
                 }
                 else if (blockNbtID.contains("copycat")) {
