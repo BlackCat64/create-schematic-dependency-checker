@@ -149,7 +149,7 @@ public class CreateSchematicDependencyChecker {
                     if (copycatMaterialTag != null) {
                         String modID = getModIDFromTag(copycatMaterialTag);
 
-                        if (modID != null)
+                        if (modID != null && !modID.equals("minecraft"))
                             modIDs.add(modID);
                     }
                     else {
@@ -228,7 +228,7 @@ public class CreateSchematicDependencyChecker {
                     System.out.print(materialTag.getName() + ": ");
 
                 String modID = getModIDFromTag(materialStateTag); // if a copycat block is empty, the mod ID will just be 'create', which is already a given anyway
-                if (modID != null)
+                if (modID != null && !modID.equals("minecraft"))
                     modIDs.add(modID);
             }
         }
