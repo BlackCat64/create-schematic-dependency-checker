@@ -1,3 +1,5 @@
+package net.blackcat64;
+
 import de.pauleff.api.ICompoundTag;
 import de.pauleff.api.IListTag;
 import de.pauleff.api.ITag;
@@ -7,7 +9,6 @@ import de.pauleff.core.Tag;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.*;
 import java.util.List;
 

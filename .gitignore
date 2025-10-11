@@ -30,3 +30,4 @@ bin/
 
 *.jar
 /target
+/jars
