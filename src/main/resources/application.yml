@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: create-schematic-dependency-checker
+
+server:
+  port: 8080
+  error:
+    include-message: always
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
+
