@@ -22,6 +22,7 @@ public class CreateSchematicDependencyChecker {
                 return name.toLowerCase().endsWith(".nbt"); // Filter the search for only NBT files
             });
             dialog.setVisible(true);
+            dialog.requestFocus();
 
             String directory = dialog.getDirectory();
             String file = dialog.getFile();
