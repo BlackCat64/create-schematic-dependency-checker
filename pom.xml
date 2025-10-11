@@ -8,5 +8,27 @@
     <artifactId>create-schematic-dependency-checker</artifactId>
     <version>0.1</version>
     <name>Minecraft Create Schematic Dependency Checker</name>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>16</source>
+                    <target>16</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
     <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>net.blackcat64</groupId>
+            <artifactId>jnbt</artifactId>
+            <version>1.6.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/jars/jNBT-1.6.0.jar</systemPath>
+        </dependency>
+    </dependencies>
 </project>
