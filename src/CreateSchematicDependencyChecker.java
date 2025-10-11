@@ -7,6 +7,7 @@ import de.pauleff.core.Tag;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -26,39 +27,12 @@ public class CreateSchematicDependencyChecker {
 
             String directory = dialog.getDirectory();
             String file = dialog.getFile();
-
             if (file == null) {
-                throw new FileNotFoundException("No file selected!");
-            }
-            else if (!file.toLowerCase().endsWith(".nbt")) {
-                throw new IllegalArgumentException("File is not an NBT file!");
+                throw new FileNotFoundException("No file found!");
             }
 
             File schematicFile = new File(directory, file);
-            System.out.println("Schematic: " + schematicFile.getAbsolutePath());
-            ICompoundTag nbtRoot = NBTFileFactory.readNBTFile(schematicFile);
-            if (DEBUG)
-                System.out.println("__________________________________________________\n");
-
-            Set<String> modIDs = getSchematicBlockDependencies(nbtRoot); // search the schematic's regular blocks
-            if (modIDs.isEmpty()) {
-                throw new Exception("Invalid NBT format - No blocks found!");
-            }
-
-            if (DEBUG)
-                System.out.println("__________________________________________________\n");
-            Set<String> modIDsInCopycats = getSchematicFramedCopycatDependencies(nbtRoot); // then search for blocks inside framed blocks and copycats
-            modIDs.addAll(modIDsInCopycats);
-
-            if (DEBUG)
-                System.out.println("=================================================\n");
-
-            System.out.println("Processing complete. Found " + modIDs.size() + " mods.\n");
-            System.out.println("<<<DEPENDENCIES>>> of " + schematicFile.getName() + ":");
-            List<String> sortedIDs = new ArrayList<>(modIDs).stream().sorted().toList(); // sort and output the IDs of the mods used in the schematic
-            for (String modID : sortedIDs) {
-                System.out.println(modID);
-            }
+            getAllSchematicDependencies(schematicFile); // pass input file into dedicated method
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -66,6 +40,47 @@ public class CreateSchematicDependencyChecker {
         finally {
             frame.dispose(); // Close the file chooser when the program finishes
         }
+    }
+
+    /**
+     * Given an NBT file containing a Minecraft Create mod schematic, returns a sorted list of its dependencies.
+     * Dependencies are found from the blocks used in the schematic, including those inside Framed Blocks and Copycat Blocks (including Create: Copycats+)
+     * The returned list contains the Mod ID of each dependency, sorted alphabetically.
+     */
+    public static List<String> getAllSchematicDependencies(File schematicFile) throws Exception {
+        if (schematicFile == null || !schematicFile.exists() || !schematicFile.isFile()) {
+            throw new FileNotFoundException("No file found!");
+        }
+        else if (!schematicFile.getName().toLowerCase().endsWith(".nbt")) {
+            throw new IllegalArgumentException("File is not an NBT file!");
+        }
+
+        System.out.println("Schematic: " + schematicFile.getAbsolutePath());
+        ICompoundTag nbtRoot = NBTFileFactory.readNBTFile(schematicFile);
+        if (DEBUG)
+            System.out.println("__________________________________________________\n");
+
+        Set<String> modIDs = getSchematicBlockDependencies(nbtRoot); // search the schematic's regular blocks
+        if (modIDs.isEmpty()) {
+            throw new Exception("Invalid NBT format - No blocks found!");
+        }
+
+        if (DEBUG)
+            System.out.println("__________________________________________________\n");
+        Set<String> modIDsInCopycats = getSchematicFramedCopycatDependencies(nbtRoot); // then search for blocks inside framed blocks and copycats
+        modIDs.addAll(modIDsInCopycats);
+
+        if (DEBUG)
+            System.out.println("=================================================\n");
+
+        System.out.println("Processing complete. Found " + modIDs.size() + " mods.\n");
+        System.out.println("<<<DEPENDENCIES>>> of " + schematicFile.getName() + ":");
+        List<String> sortedIDs = new ArrayList<>(modIDs).stream().sorted().toList(); // sort and output the IDs of the mods used in the schematic
+        for (String modID : sortedIDs) {
+            System.out.println(modID);
+        }
+
+        return sortedIDs;
     }
 
     public static Set<String> getSchematicBlockDependencies(ICompoundTag schematicNbtRoot) throws Exception {
