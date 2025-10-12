@@ -3,18 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Schematic Dependency Checker</title>
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-<h2>Upload a Schematic (.nbt) File</h2>
+    <div class="container">
+        <h2>Upload a Schematic (.nbt) File</h2>
 
-<form id="uploadForm" enctype="multipart/form-data">
-    <input type="file" id="fileInput" name="file" accept=".nbt"/>
-    <button type="submit">Upload</button>
-</form>
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="fileInput" name="file" accept=".nbt"/>
+            <button type="submit">Upload</button>
+        </form>
 
-<div id="result" style="margin-top: 20px;"></div>
-
-<!-- Use query param in resource location to ensure the file isn't cached during development, making sure it is reloaded every time -->
-<script th:src="@{/js/upload.js(v=${#dates.createNow().getTime()})}"></script>
+        <div id="result"></div>
+    </div>
+    <!-- Use query param in resource location to ensure the file isn't cached during development, making sure it is reloaded every time -->
+    <script th:src="@{/js/upload.js(v=${#dates.createNow().getTime()})}"></script>
 </body>
 </html>

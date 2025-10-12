@@ -25,7 +25,7 @@ form.addEventListener('submit', async (e) => {
 
         if (!response.ok) {
             resultDiv.innerHTML = `
-                        <p style='color:red'>
+                        <p class="error">
                             Error ${data.status}: ${data.error || 'Unknown'} - ${data.message || 'Unknown'}
                         </p>
                     `;
@@ -41,6 +41,6 @@ form.addEventListener('submit', async (e) => {
 
     } catch (error) {
         console.error(error);
-        resultDiv.innerHTML = `<p style='color:red'>An unexpected error occurred.</p>`;
+        resultDiv.innerHTML = `<p class="error">An unexpected error occurred.</p>`;
     }
 });
