@@ -5,6 +5,7 @@ import de.pauleff.api.IListTag;
 import de.pauleff.api.ITag;
 import de.pauleff.api.NBTFileFactory;
 import de.pauleff.core.Tag;
+import net.blackcat64.create_schematic_dependency_checker.exceptions.InvalidNbtException;
 
 import java.awt.*;
 import java.io.File;

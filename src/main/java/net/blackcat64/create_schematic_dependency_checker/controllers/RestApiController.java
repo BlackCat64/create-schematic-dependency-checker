@@ -1,7 +1,7 @@
 package net.blackcat64.create_schematic_dependency_checker.controllers;
 
 import net.blackcat64.create_schematic_dependency_checker.CreateSchematicDependencyChecker;
-import net.blackcat64.create_schematic_dependency_checker.InvalidNbtException;
+import net.blackcat64.create_schematic_dependency_checker.exceptions.InvalidNbtException;
 import net.blackcat64.create_schematic_dependency_checker.dtos.SchematicDependencies;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +21,7 @@ public class RestApiController {
 
     @PostMapping("/schematic")
     public ResponseEntity<SchematicDependencies> uploadSchematic(@RequestParam MultipartFile file) throws IOException, InvalidNbtException {
-            if (!file.getName().toLowerCase().endsWith(".nbt")) {
+            if (file == null || file.getOriginalFilename() == null || !file.getOriginalFilename().toLowerCase().endsWith(".nbt")) {
                 throw new InvalidNbtException("File is not an NBT file!");
             }
 
