@@ -9,6 +9,7 @@ import de.pauleff.core.Tag;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 import java.util.List;
 
@@ -48,12 +49,12 @@ public class CreateSchematicDependencyChecker {
      * Dependencies are found from the blocks used in the schematic, including those inside Framed Blocks and Copycat Blocks (including Create: Copycats+)
      * The returned list contains the Mod ID of each dependency, sorted alphabetically.
      */
-    public static List<String> getAllSchematicDependencies(File schematicFile) throws Exception {
+    public static List<String> getAllSchematicDependencies(File schematicFile) throws IOException, InvalidNbtException {
         if (schematicFile == null || !schematicFile.exists() || !schematicFile.isFile()) {
             throw new FileNotFoundException("No file found!");
         }
         else if (!schematicFile.getName().toLowerCase().endsWith(".nbt")) {
-            throw new IllegalArgumentException("File is not an NBT file!");
+            throw new InvalidNbtException("File is not an NBT file!");
         }
 
         System.out.println("Schematic: " + schematicFile.getAbsolutePath());
@@ -63,7 +64,7 @@ public class CreateSchematicDependencyChecker {
 
         Set<String> modIDs = getSchematicBlockDependencies(nbtRoot); // search the schematic's regular blocks
         if (modIDs.isEmpty()) {
-            throw new Exception("Invalid NBT format - No blocks found!");
+            throw new InvalidNbtException("Invalid NBT format - No blocks found!");
         }
 
         if (DEBUG)
@@ -84,15 +85,15 @@ public class CreateSchematicDependencyChecker {
         return sortedIDs;
     }
 
-    public static Set<String> getSchematicBlockDependencies(ICompoundTag schematicNbtRoot) throws Exception {
+    public static Set<String> getSchematicBlockDependencies(ICompoundTag schematicNbtRoot) throws InvalidNbtException {
         IListTag blockPalette = schematicNbtRoot.getList("palette");
         if (blockPalette == null) {
-            throw new Exception("Invalid NBT format - Could not find block palette.");
+            throw new InvalidNbtException("Invalid NBT format - Could not find block palette.");
         }
 
         List<Tag<?>> blocks = blockPalette.getData(); // Get the list out of the IListTag
         if (blocks == null || blocks.isEmpty()) {
-            throw new Exception("Invalid NBT format - No blocks found.");
+            throw new InvalidNbtException("Invalid NBT format - No blocks found.");
         }
 
         // for each block tag, get the Name string value and extract the mod ID into a set
@@ -111,15 +112,15 @@ public class CreateSchematicDependencyChecker {
         return modIDs;
     }
 
-    public static Set<String> getSchematicFramedCopycatDependencies(ICompoundTag schematicNbtRoot) throws Exception {
+    public static Set<String> getSchematicFramedCopycatDependencies(ICompoundTag schematicNbtRoot) throws InvalidNbtException {
         IListTag blocksTag = schematicNbtRoot.getList("blocks");
         if (blocksTag == null) {
-            throw new Exception("Invalid NBT format - Could not find blocks tag.");
+            throw new InvalidNbtException("Invalid NBT format - Could not find blocks tag.");
         }
 
         List<Tag<?>> blocks = blocksTag.getData(); // Get the list out of the IListTag
         if (blocks == null || blocks.isEmpty()) {
-            throw new Exception("Invalid NBT format - No blocks found.");
+            throw new InvalidNbtException("Invalid NBT format - No blocks found.");
         }
 
         // for each Framed Block / Copycat Block, retrieve the block inside
