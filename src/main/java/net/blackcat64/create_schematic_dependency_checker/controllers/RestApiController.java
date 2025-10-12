@@ -1,6 +1,7 @@
 package net.blackcat64.create_schematic_dependency_checker.controllers;
 
 import net.blackcat64.create_schematic_dependency_checker.CreateSchematicDependencyChecker;
+import net.blackcat64.create_schematic_dependency_checker.InvalidNbtException;
 import net.blackcat64.create_schematic_dependency_checker.dtos.SchematicDependencies;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,7 +13,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -20,8 +20,11 @@ import java.util.List;
 public class RestApiController {
 
     @PostMapping("/schematic")
-    public ResponseEntity<SchematicDependencies> getDependencies(@RequestParam MultipartFile file) {
-        try {
+    public ResponseEntity<SchematicDependencies> uploadSchematic(@RequestParam MultipartFile file) throws IOException, InvalidNbtException {
+            if (!file.getName().toLowerCase().endsWith(".nbt")) {
+                throw new InvalidNbtException("File is not an NBT file!");
+            }
+
             // store file temporarily
             File tempFile = File.createTempFile("uploaded-", ".nbt");
             file.transferTo(tempFile);
@@ -40,10 +43,5 @@ public class RestApiController {
 
             // return to client
             return ResponseEntity.ok(result);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.internalServerError().build();
-        }
     }
 }
