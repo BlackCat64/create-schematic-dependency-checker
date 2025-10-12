@@ -59,7 +59,13 @@ public class CreateSchematicDependencyChecker {
         }
 
         System.out.println("Schematic: " + schematicFile.getAbsolutePath());
-        ICompoundTag nbtRoot = NBTFileFactory.readNBTFile(schematicFile);
+        ICompoundTag nbtRoot;
+        try {
+            nbtRoot = NBTFileFactory.readNBTFile(schematicFile);
+        } catch (IOException e) {
+            throw new InvalidNbtException("Failed to parse NBT from file!");
+        }
+
         if (DEBUG)
             System.out.println("__________________________________________________\n");
 
