@@ -1,4 +1,4 @@
-package net.blackcat64;
+package net.blackcat64.create_schematic_dependency_checker.controllers;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;

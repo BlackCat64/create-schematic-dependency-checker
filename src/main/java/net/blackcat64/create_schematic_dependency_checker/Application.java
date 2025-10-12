@@ -1,4 +1,4 @@
-package net.blackcat64;
+package net.blackcat64.create_schematic_dependency_checker;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
