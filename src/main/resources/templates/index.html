@@ -4,10 +4,28 @@
     <meta charset="UTF-8">
     <title>Schematic Dependency Checker</title>
     <link rel="stylesheet" href="/css/styles.css">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
 </head>
 <body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <nav class="navbar-links">
+                <a href="https://github.com/BlackCat64" class="nav-link profile" target="_blank">
+                    <img src="/images/discord-pfp-square.jpg" alt="BlackCat64">
+                    BlackCat64
+                </a>
+                <a href="https://createmod.com/" class="nav-link standard" target="_blank">CreateMod.com</a>
+            </nav>
+            <h1 class="navbar-title">Schematic Dependency Checker</h1>
+            <span class="navbar-padding"></span>
+        </div>
+    </header>
+
     <div class="container">
-        <h2>Upload a Schematic (.nbt) File</h2>
+        <div class="title">
+            <img src="/images/schematic.png" alt="Schematic">
+            <p>Upload a Schematic (.nbt) File</p>
+        </div>
 
         <form id="uploadForm" enctype="multipart/form-data">
             <input type="file" id="fileInput" name="file" accept=".nbt"/>

@@ -6,6 +6,7 @@ form.addEventListener('submit', async (e) => {
 
     const fileInput = document.getElementById('fileInput');
     if (!fileInput.files.length) {
+        resultDiv.style.display = "block";
         resultDiv.innerHTML = "<p style='color:red'>Please select a file.</p>";
         return;
     }
@@ -22,6 +23,7 @@ form.addEventListener('submit', async (e) => {
         resultDiv.innerHTML = "<p>Processing file...</p>";
 
         const data = await response.json();
+        resultDiv.style.display = "block";
 
         if (!response.ok) {
             resultDiv.innerHTML = `
@@ -35,7 +37,7 @@ form.addEventListener('submit', async (e) => {
         // build HTML to display list of schematic dependencies
         const dependencies = data.dependencies.map(d => `<li>${d}</li>`).join('');
         resultDiv.innerHTML = `
-                    <h3>Dependencies for <em>${data.schematicName}</em></h3>
+                    <h3>Dependencies for <strong>${data.schematicName}</strong></h3>
                     <ul>${dependencies}</ul>
                 `;
 
