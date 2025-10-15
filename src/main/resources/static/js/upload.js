@@ -43,19 +43,19 @@ form.addEventListener('submit', async (e) => {
                 displayed = "Create: Steam n' Rails";
             else displayed = dep;
 
-            dependenciesList += `<li>${displayed}`;
-            dependenciesList += `<a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=mc-mods&search=${encodeURIComponent(displayed)}" target="_blank">
+            dependenciesList += `<tr><td>${displayed}</td>`;
+            dependenciesList += `<td><a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=mc-mods&search=${encodeURIComponent(displayed)}" target="_blank">
                                     <img src="/images/curseforge.png" alt="CurseForge" title="Search on CurseForge">
-                                 </a>`;
-            dependenciesList += `<a href="https://modrinth.com/mods?q=${encodeURIComponent(displayed)}" target="_blank">
+                                 </a></td>`;
+            dependenciesList += `<td><a href="https://modrinth.com/mods?q=${encodeURIComponent(displayed)}" target="_blank">
                                     <img src="/images/modrinth.png" alt="Modrinth" title="Search on Modrinth">
-                                 </a>`;
-            dependenciesList += '</li>';
+                                 </a></td>`;
+            dependenciesList += '</tr>';
         }
 
         resultDiv.innerHTML = `
                     <h3>Dependencies for <strong>${data.schematicName}</strong></h3>
-                    <ul>${dependenciesList}</ul>
+                    <table>${dependenciesList}</table>
                 `;
 
     } catch (error) {

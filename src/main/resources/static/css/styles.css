@@ -1,5 +1,8 @@
-body {
+* {
     font-family: 'Inter', 'Arial', sans-serif;
+}
+
+body {
     background-color: #1f2121;
     color: #ffffff;
     margin: 0;
@@ -76,20 +79,10 @@ button:hover {
     border: 1px solid #ccc;
 }
 
-#result ul {
-    list-style-type: disc;
-    margin-left: 1.5rem;
-    margin-top: 1.5rem;
+#result table {
+    margin: 1.5rem;
 }
 
-#result p, #result li {
-    display: flex;
-    align-items: center;
-
-    font-size: 0.95rem;
-    margin-bottom: 0.5rem;
-    margin-top: 0.5rem;
-}
 #result a {
     display: flex;
     align-items: center;
@@ -138,7 +131,7 @@ button:hover {
 
 .navbar-title {
     font-size: 1.8rem;
-    margin: 0;
+    margin: 1rem;
     text-align: center;
 }
 
