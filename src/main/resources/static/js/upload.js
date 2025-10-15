@@ -35,10 +35,22 @@ form.addEventListener('submit', async (e) => {
         }
 
         // build HTML to display list of schematic dependencies
-        const dependencies = data.dependencies.map(d => `<li>${d}</li>`).join('');
+        let dependenciesList = "";
+
+        for (const dep of data.dependencies) {
+            dependenciesList += `<li>${dep}`;
+            dependenciesList += `<a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=mc-mods&search=${encodeURIComponent(dep)}" target="_blank">
+                                    <img src="/images/curseforge.png" alt="CurseForge" title="Search on CurseForge">
+                                 </a>`;
+            dependenciesList += `<a href="https://modrinth.com/mods?q=${encodeURIComponent(dep)}" target="_blank">
+                                    <img src="/images/modrinth.png" alt="Modrinth" title="Search on Modrinth">
+                                 </a>`;
+            dependenciesList += '</li>';
+        }
+
         resultDiv.innerHTML = `
                     <h3>Dependencies for <strong>${data.schematicName}</strong></h3>
-                    <ul>${dependencies}</ul>
+                    <ul>${dependenciesList}</ul>
                 `;
 
     } catch (error) {
