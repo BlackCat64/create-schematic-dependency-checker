@@ -38,11 +38,16 @@ form.addEventListener('submit', async (e) => {
         let dependenciesList = "";
 
         for (const dep of data.dependencies) {
-            dependenciesList += `<li>${dep}`;
-            dependenciesList += `<a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=mc-mods&search=${encodeURIComponent(dep)}" target="_blank">
+            let displayed;
+            if (dep === 'railways')
+                displayed = "Create: Steam n' Rails";
+            else displayed = dep;
+
+            dependenciesList += `<li>${displayed}`;
+            dependenciesList += `<a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=mc-mods&search=${encodeURIComponent(displayed)}" target="_blank">
                                     <img src="/images/curseforge.png" alt="CurseForge" title="Search on CurseForge">
                                  </a>`;
-            dependenciesList += `<a href="https://modrinth.com/mods?q=${encodeURIComponent(dep)}" target="_blank">
+            dependenciesList += `<a href="https://modrinth.com/mods?q=${encodeURIComponent(displayed)}" target="_blank">
                                     <img src="/images/modrinth.png" alt="Modrinth" title="Search on Modrinth">
                                  </a>`;
             dependenciesList += '</li>';
