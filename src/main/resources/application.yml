@@ -13,6 +13,7 @@ server:
     include-message: always
     whitelabel:
       enabled: false
+    include-stacktrace: never # For production, never show the stacktrace
 
 
 logging:
