@@ -15,13 +15,13 @@ form.addEventListener('submit', async (e) => {
     formData.append('file', fileInput.files[0]); // get the first file in the user's selection
 
     try {
+        resultDiv.style.display = "block";
+        resultDiv.innerHTML = "<p>Processing file...</p>";
+
         const response = await fetch('/api/schematic', { // use REST API to get schematic dependencies
             method: 'POST',
             body: formData
         });
-
-        resultDiv.style.display = "block";
-        resultDiv.innerHTML = "<p>Processing file...</p>";
 
         const data = await response.json();
 
