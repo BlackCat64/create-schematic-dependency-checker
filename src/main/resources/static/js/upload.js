@@ -19,6 +19,11 @@ form.addEventListener('submit', async (e) => {
     spinner.style.display = "block";
     outputDiv.innerHTML = ""; // Clear previous results when next results are loading
 
+    let copyButton = document.getElementById("copyButton");
+    if (copyButton) {
+        copyButton.style.display = "none"; // Hide copy button until result is shown
+    }
+
     const formData = new FormData();
     formData.append('file', fileInput.files[0]); // get the first file in the user's selection
 
@@ -62,11 +67,29 @@ form.addEventListener('submit', async (e) => {
         }
 
         outputDiv.innerHTML = `
+                    <div class="result-header">
                     <h3>Dependencies for <strong>${data.schematicName}</strong></h3>
+                    <button id="copyButton">📋 Copy to Clipboard</button>
+                    </div>
                     <table>${dependenciesList}</table>
                 `;
 
-    } catch (error) {
+        copyButton = document.getElementById("copyButton");
+        copyButton.style.display = "block";
+
+        copyButton.onclick = async () => {
+            const textToCopy = data.dependencies.join("\n");
+            try {
+                await navigator.clipboard.writeText(textToCopy);
+                copyButton.textContent = "Copied!";
+                setTimeout(() => copyButton.textContent = "📋 Copy to Clipboard", 2000);
+            } catch (err) {
+                console.error("Failed to copy text: ", err);
+                copyButton.textContent = "Copy Failed";
+            }
+        };
+    }
+    catch (error) {
         spinner.style.display = "none";
         console.error(error);
         outputDiv.innerHTML = `<p class="error">An unexpected error occurred: ${error.message}</p>`;

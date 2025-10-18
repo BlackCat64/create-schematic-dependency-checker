@@ -98,6 +98,24 @@ button:hover {
     color: #bf9045;
 }
 
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#copyButton {
+    display: none;
+
+    font-size: 0.9rem;
+    text-align: center;
+
+    width: 11rem;
+    min-height: 2.5rem;
+
+    padding: 0.5rem;
+}
+
 .error {
     color: #b91c1c;
     background-color: #fee2e2;
