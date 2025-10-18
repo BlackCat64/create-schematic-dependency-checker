@@ -20,10 +20,10 @@ form.addEventListener('submit', async (e) => {
             body: formData
         });
 
+        resultDiv.style.display = "block";
         resultDiv.innerHTML = "<p>Processing file...</p>";
 
         const data = await response.json();
-        resultDiv.style.display = "block";
 
         if (!response.ok) {
             resultDiv.innerHTML = `
