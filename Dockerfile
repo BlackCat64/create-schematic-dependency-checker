@@ -9,6 +9,9 @@ COPY .mvn .mvn
 COPY src src
 COPY jars jars
 
+# Allow maven wrapper to be run
+RUN chmod +x mvnw
+
 # Install jNBT into the local Maven repository
 RUN ./mvnw install:install-file \
   -Dfile=jars/jNBT-1.6.0.jar \
