@@ -1,23 +1,28 @@
 const form = document.getElementById('uploadForm');
 const resultDiv = document.getElementById('result');
+const spinner = document.getElementById("loading-spinner");
+const outputDiv = document.getElementById("output");
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault(); // prevent page reload upon form submit
 
     const fileInput = document.getElementById('fileInput');
+
+    // show error if Upload was clicked without uploading a file
     if (!fileInput.files.length) {
         resultDiv.style.display = "block";
-        resultDiv.innerHTML = "<p style='color:red'>Please select a file.</p>";
+        outputDiv.innerHTML = "<p class='error'>Please select a file.</p>";
         return;
     }
+
+    resultDiv.style.display = "block";
+    spinner.style.display = "block";
+    outputDiv.innerHTML = ""; // Clear previous results when next results are loading
 
     const formData = new FormData();
     formData.append('file', fileInput.files[0]); // get the first file in the user's selection
 
     try {
-        resultDiv.style.display = "block";
-        resultDiv.innerHTML = "<p>Processing file...</p>";
-
         const response = await fetch('/api/schematic', { // use REST API to get schematic dependencies
             method: 'POST',
             body: formData
@@ -25,8 +30,11 @@ form.addEventListener('submit', async (e) => {
 
         const data = await response.json();
 
+        // Hide loading spinner once all data has been received from the backend
+        spinner.style.display = "none";
+
         if (!response.ok) {
-            resultDiv.innerHTML = `
+            outputDiv.innerHTML = `
                         <p class="error">
                             Error ${data.status}: ${data.error || 'Unknown'} - ${data.message || 'Unknown'}
                         </p>
@@ -53,13 +61,14 @@ form.addEventListener('submit', async (e) => {
             dependenciesList += '</tr>';
         }
 
-        resultDiv.innerHTML = `
+        outputDiv.innerHTML = `
                     <h3>Dependencies for <strong>${data.schematicName}</strong></h3>
                     <table>${dependenciesList}</table>
                 `;
 
     } catch (error) {
+        spinner.style.display = "none";
         console.error(error);
-        resultDiv.innerHTML = `<p class="error">An unexpected error occurred.</p>`;
+        outputDiv.innerHTML = `<p class="error">An unexpected error occurred: ${error.message}</p>`;
     }
 });
