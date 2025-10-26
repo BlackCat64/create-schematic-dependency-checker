@@ -1,15 +1,25 @@
-## How to deploy on Google Cloud Run
+## How to deploy on Google Cloud Run and GitHub Pages
 
-URL: https://schematic-dependency-checker-956428592161.europe-west1.run.app/
+Front-end URL: https://blackcat64.github.io/create-schematic-dependency-checker/
+Backend URL: https://schematic-dependency-checker-956428592161.europe-west1.run.app/
 
 Whenever changes are made:
 
-1. Submit the latest build
+1. Ensure the API URL is set correctly in `upload.js`
+
+2. Build the maven project - copies static files to the /docs directory
+```bash
+./mvnw clean package
+```
+
+3. Run a `git push` to deploy the front-end on GitHub Pages
+
+4. Submit the latest build
 ```bash
 gcloud builds submit --tag europe-west1-docker.pkg.dev/schematic-dependency-checker/schematic-repo/schematic-dependency-checker
 ```
 
-2. Deploy the app
+5. Deploy the backend on Google Cloud Run
 ```bash
 gcloud run deploy schematic-dependency-checker \
   --image europe-west1-docker.pkg.dev/schematic-dependency-checker/schematic-repo/schematic-dependency-checker \
