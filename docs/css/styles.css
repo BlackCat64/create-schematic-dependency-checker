@@ -116,6 +116,14 @@ button:hover {
     padding: 0.5rem;
 }
 
+.more-info {
+    font-size: 0.8rem;
+    color: #b3b3b3;
+
+    margin-top: 2rem;
+    margin-bottom: 0;
+}
+
 .error {
     color: #b91c1c;
     background-color: #fee2e2;

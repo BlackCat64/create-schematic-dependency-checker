@@ -29,7 +29,9 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // use backend REST API to get schematic dependencies - hosted on Google Cloud Run
-        const response = await fetch('https://schematic-dependency-checker-956428592161.europe-west1.run.app/api/schematic', {
+        const apiURL = '/api/schematic';
+        // const apiURL = 'https://schematic-dependency-checker-956428592161.europe-west1.run.app/api/schematic';
+        const response = await fetch(apiURL, {
             method: 'POST',
             body: formData
         });
@@ -59,10 +61,10 @@ form.addEventListener('submit', async (e) => {
 
             dependenciesList += `<tr><td>${displayed}</td>`;
             dependenciesList += `<td><a href="https://www.curseforge.com/minecraft/search?page=1&pageSize=20&sortBy=relevancy&class=mc-mods&search=${encodeURIComponent(displayed)}" target="_blank">
-                                    <img src="/images/curseforge.png" alt="CurseForge" title="Search on CurseForge">
+                                    <img src="images/curseforge.png" alt="CurseForge" title="Search on CurseForge">
                                  </a></td>`;
             dependenciesList += `<td><a href="https://modrinth.com/mods?q=${encodeURIComponent(displayed)}" target="_blank">
-                                    <img src="/images/modrinth.png" alt="Modrinth" title="Search on Modrinth">
+                                    <img src="images/modrinth.png" alt="Modrinth" title="Search on Modrinth">
                                  </a></td>`;
             dependenciesList += '</tr>';
         }
@@ -73,6 +75,11 @@ form.addEventListener('submit', async (e) => {
                     <button id="copyButton">📋 Copy to Clipboard</button>
                     </div>
                     <table>${dependenciesList}</table>
+                    <p class="more-info">
+                        Only mod IDs are shown. These are usually very similar to the mod's name, but in some cases they may be very different.
+                        <br>
+                        For example, Create: Steam n' Rails has the ID 'railways'. On this site, there's a special exception for that one though!
+                    </p>
                 `;
 
         copyButton = document.getElementById("copyButton");
