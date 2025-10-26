@@ -29,8 +29,8 @@ form.addEventListener('submit', async (e) => {
 
     try {
         // use backend REST API to get schematic dependencies - hosted on Google Cloud Run
-        const apiURL = '/api/schematic';
-        // const apiURL = 'https://schematic-dependency-checker-956428592161.europe-west1.run.app/api/schematic';
+        // const apiURL = '/api/schematic';
+        const apiURL = 'https://schematic-dependency-checker-956428592161.europe-west1.run.app/api/schematic';
         const response = await fetch(apiURL, {
             method: 'POST',
             body: formData
