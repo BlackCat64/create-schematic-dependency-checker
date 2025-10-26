@@ -46,6 +46,10 @@
                                     <directory>src/main/resources/static</directory>
                                     <filtering>false</filtering>
                                 </resource>
+                                <resource>
+                                    <directory>src/main/resources/templates</directory>
+                                    <filtering>false</filtering>
+                                </resource>
                             </resources>
                         </configuration>
                     </execution>
