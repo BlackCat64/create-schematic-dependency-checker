@@ -52,7 +52,6 @@
             <div id="output"></div>
         </div>
     </div>
-    <!-- Use query param in resource location to ensure the file isn't cached during development, making sure it is reloaded every time -->
-    <script th:src="@{/js/upload.js(v=${#dates.createNow().getTime()})}"></script>
+    <script src="/js/upload.js"></script>
 </body>
 </html>

@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Schematic Dependency Checker</title>
@@ -10,8 +9,8 @@
     <!-- Social Embed preview -->
     <meta property="og:title" content="Schematic Dependency Checker">
     <meta property="og:description" content="Upload Minecraft schematics (Create mod) to instantly see which mods they depend on.">
-<!--    <meta property="og:image" content="/images/schematic.png">-->
-<!--    <meta property="og:url" content="url">-->
+    <meta property="og:image" content="https://blackcat64.github.io/create-schematic-dependency-checker/images/schematic.png">
+    <meta property="og:url" content="https://blackcat64.github.io/create-schematic-dependency-checker">
     <meta property="og:type" content="website">
 </head>
 <body>
@@ -52,7 +51,6 @@
             <div id="output"></div>
         </div>
     </div>
-    <!-- Use query param in resource location to ensure the file isn't cached during development, making sure it is reloaded every time -->
-    <script th:src="@{/js/upload.js(v=${#dates.createNow().getTime()})}"></script>
+    <script src="/js/upload.js"></script>
 </body>
 </html>
