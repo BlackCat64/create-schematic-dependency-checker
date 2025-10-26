@@ -4,10 +4,7 @@ import net.blackcat64.create_schematic_dependency_checker.CreateSchematicDepende
 import net.blackcat64.create_schematic_dependency_checker.exceptions.InvalidNbtException;
 import net.blackcat64.create_schematic_dependency_checker.dtos.SchematicDependencies;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -17,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api")
+@CrossOrigin(origins = "https://blackcat64.github.io")
 public class RestApiController {
 
     @PostMapping("/schematic")
