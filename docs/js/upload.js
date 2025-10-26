@@ -28,7 +28,8 @@ form.addEventListener('submit', async (e) => {
     formData.append('file', fileInput.files[0]); // get the first file in the user's selection
 
     try {
-        const response = await fetch('/api/schematic', { // use REST API to get schematic dependencies
+        // use backend REST API to get schematic dependencies - hosted on Google Cloud Run
+        const response = await fetch('https://schematic-dependency-checker-956428592161.europe-west1.run.app/api/schematic', {
             method: 'POST',
             body: formData
         });
