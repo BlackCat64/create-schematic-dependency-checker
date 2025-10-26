@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Schematic Dependency Checker</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+
+    <!-- Social Embed preview -->
+    <meta property="og:title" content="Schematic Dependency Checker">
+    <meta property="og:description" content="Upload Minecraft schematics (Create mod) to instantly see which mods they depend on.">
+<!--    <meta property="og:image" content="/images/schematic.png">-->
+<!--    <meta property="og:url" content="url">-->
+    <meta property="og:type" content="website">
+</head>
+<body>
+    <header class="navbar">
+        <div class="navbar-container">
+            <nav class="navbar-links">
+                <div class="profile-links">
+                    <img src="/images/discord-pfp-square.jpg" alt="BlackCat64">
+                    <strong>BlackCat64:</strong>
+                    <a href="https://github.com/BlackCat64" target="_blank">
+                        <img src="/images/github.png" alt="GitHub" title="BlackCat64 on GitHub">
+                    </a>
+                    <a href="https://www.curseforge.com/members/blackcat64/projects" target="_blank">
+                        <img src="/images/curseforge.png" alt="CurseForge" title="Check out my mods on CurseForge!">
+                    </a>
+                </div>
+
+                <a href="https://createmod.com/" class="nav-link standard" target="_blank">CreateMod.com</a>
+            </nav>
+            <h1 class="navbar-title">Schematic Dependency Checker</h1>
+            <span class="navbar-padding"></span>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="title">
+            <img src="/images/schematic.png" alt="Schematic">
+            <p>Upload a Schematic (.nbt) File</p>
+        </div>
+
+        <form id="uploadForm" enctype="multipart/form-data">
+            <input type="file" id="fileInput" name="file" accept=".nbt"/>
+            <button type="submit">Upload</button>
+        </form>
+
+        <div id="result">
+            <div id="loading-spinner" class="loading-spinner"></div>
+            <div id="output"></div>
+        </div>
+    </div>
+    <!-- Use query param in resource location to ensure the file isn't cached during development, making sure it is reloaded every time -->
+    <script th:src="@{/js/upload.js(v=${#dates.createNow().getTime()})}"></script>
+</body>
+</html>
