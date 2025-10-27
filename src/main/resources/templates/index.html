@@ -19,12 +19,12 @@
             <nav class="navbar-links">
                 <div class="profile-links">
                     <img src="images/discord-pfp-square.jpg" alt="BlackCat64">
-                    <strong>BlackCat64:</strong>
+                    <strong>BlackCat64</strong>
                     <a href="https://github.com/BlackCat64" target="_blank">
                         <img src="images/github.png" alt="GitHub" title="BlackCat64 on GitHub">
                     </a>
                     <a href="https://www.curseforge.com/members/blackcat64/projects" target="_blank">
-                        <img src="images/curseforge.png" alt="CurseForge" title="Check out my mods on CurseForge!">
+                        <img src="images/curseforge.png" alt="CurseForge" title="BlackCat64 on CurseForge!">
                     </a>
                 </div>
 
@@ -34,22 +34,37 @@
             <span class="navbar-padding"></span>
         </div>
     </header>
-
-    <div class="container">
-        <div class="title">
-            <img src="images/schematic.png" alt="Schematic">
-            <p>Upload a Schematic (.nbt) File</p>
+    <div class="outer-container">
+        <div class="promo">
+            <p class="promo-title">Check out my mods on CurseForge!</p>
+            <a class="mod-link" href="https://www.curseforge.com/minecraft/mc-mods/better-tools-and-armor" target="_blank">
+                <p>Better Tools and Armor</p>
+                <img src="https://media.forgecdn.net/attachments/1231/143/better-tools-and-armor-main-promo-image-12-0-png.png" alt="Better Tools and Armor">
+            </a>
+            <a class="mod-link" href="https://www.curseforge.com/minecraft/mc-mods/big-signs" target="_blank">
+                <p>Big Signs</p>
+                <img src="https://media.forgecdn.net/attachments/1039/41/big-signs-cover-photo.png" alt="Big Signs">
+            </a>
         </div>
 
-        <form id="uploadForm" enctype="multipart/form-data">
-            <input type="file" id="fileInput" name="file" accept=".nbt"/>
-            <button type="submit">Upload</button>
-        </form>
+        <div class="container">
+            <div class="title">
+                <img src="images/schematic.png" alt="Schematic">
+                <p>Upload a Schematic (.nbt) File</p>
+            </div>
 
-        <div id="result">
-            <div id="loading-spinner" class="loading-spinner"></div>
-            <div id="output"></div>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <input type="file" id="fileInput" name="file" accept=".nbt"/>
+                <button type="submit">Upload</button>
+            </form>
+
+            <div id="result">
+                <div id="loading-spinner" class="loading-spinner"></div>
+                <div id="output"></div>
+            </div>
         </div>
+
+        <span class="outer-padding"></span>
     </div>
     <script src="js/upload.js"></script>
 </body>

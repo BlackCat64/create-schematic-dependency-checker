@@ -9,8 +9,16 @@ body {
     padding: 2rem;
 }
 
+.outer-container {
+    display: flex;
+    align-items: flex-start;
+}
+.outer-padding {
+    margin-right: 20%;
+}
+
 .container {
-    max-width: 600px;
+    width: 600px;
     margin: 0 auto;
     background: #353838;
     padding: 2rem;
@@ -152,11 +160,10 @@ button:hover {
 /* ---------- Header / Navbar ---------- */
 .navbar {
     background-color: #353838;
-    border: 1px solid #bf9045;
+    border: 3px solid #bf9045;
     border-radius: 0.5rem;
     max-width: 80%;
-    margin-left: 10%;
-    margin-bottom: 2rem;
+    margin: 0 auto 2rem;
 
     color: white;
     padding: 1rem 0;
@@ -174,7 +181,7 @@ button:hover {
 
 .navbar-title {
     font-size: 1.8rem;
-    margin: 1rem;
+    margin: 1rem 1rem 1rem 0;
     text-align: center;
 }
 
@@ -185,14 +192,17 @@ button:hover {
 .navbar-links {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    flex-wrap: wrap;
+    column-gap: 4rem;
+    row-gap: 0;
+
+    /*max-width: 40%;*/
 }
 
 .navbar-links img {
     max-width: 40px;
     max-height: 40px;
     border-radius: 20px;
-    margin-right: 0.5rem;
 }
 
 .nav-link {
@@ -221,9 +231,53 @@ button:hover {
 .profile-links {
     display: flex;
     align-items: center;
+    gap: 0.75rem;
 }
 .profile-links strong, .profile-links a {
     display: flex;
     align-items: center;
-    margin-right: 0.5rem;
+}
+
+/* --- Promo Box --- */
+.promo {
+    border-radius: 0.5rem;
+    border: 1px solid #f16436;
+    background-color: #353838;
+
+    max-width: 15rem;
+    padding: 1.2rem;
+    margin-left: 10%;
+
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+}
+.promo-title {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.mod-link {
+    text-decoration: none;
+    color: white;
+
+    border: 1px solid #bf9045;
+    border-radius: 0.5rem;
+    background-color: #1f2121;
+    transition: color 0.2s ease;
+
+    margin: 0.5rem auto;
+}
+.mod-link:hover {
+    color: #bf9045;
+}
+.mod-link p {
+    margin-top: 0.7rem;
+    margin-bottom: 0.7rem;
+}
+.mod-link img {
+    display: block;
+    max-width: 15rem;
+    max-height: 10rem;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
 }

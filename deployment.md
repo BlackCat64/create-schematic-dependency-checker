@@ -28,5 +28,5 @@ gcloud run deploy schematic-dependency-checker \
   --allow-unauthenticated
 ```
 
-**To view logs**, go to the Logs tab of the `schematic-dependency-checker` Service.
+**To view logs**, go to the Logs tab of the `schematic-dependency-checker` Service.\
 https://console.cloud.google.com/run/detail/europe-west1/schematic-dependency-checker/observability/logs
