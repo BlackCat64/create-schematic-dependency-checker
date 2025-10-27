@@ -6,7 +6,7 @@
 
     <groupId>net.blackcat64</groupId>
     <artifactId>create-schematic-dependency-checker</artifactId>
-    <version>0.2</version>
+    <version>1.0</version>
     <name>Minecraft Create Schematic Dependency Checker</name>
 
     <parent>
