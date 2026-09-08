@@ -47,25 +47,36 @@
             </a>
         </div>
 
-        <div class="container">
-            <div class="title">
-                <img src="images/schematic.png" alt="Schematic">
-                <p>Upload a Schematic (.nbt) File</p>
+        <div class="container2">
+            <div class="container">
+                <div class="title">
+                    <img src="images/schematic.png" alt="Schematic">
+                    <p>Upload a Schematic (.nbt) File</p>
+                </div>
+
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" accept=".nbt"/>
+                    <button type="submit">Upload</button>
+                </form>
+
+                <div id="result">
+                    <div id="loading-spinner" class="loading-spinner"></div>
+                    <div id="output"></div>
+                </div>
             </div>
-
-            <form id="uploadForm" enctype="multipart/form-data">
-                <input type="file" id="fileInput" name="file" accept=".nbt"/>
-                <button type="submit">Upload</button>
-            </form>
-
-            <div id="result">
-                <div id="loading-spinner" class="loading-spinner"></div>
-                <div id="output"></div>
+            <div class="extra-text">
+                <p>
+                    Find out which mods were used to build a schematic in Minecraft!
+                    <br>
+                    Only <strong>Create Mod</strong> schematics are accepted.
+                </p>
+                <p>
+                    Also checks camo blocks inside Framed Blocks and Copycat Blocks.
+                </p>
             </div>
         </div>
-
-        <span class="outer-padding"></span>
     </div>
+
     <script src="js/upload.js"></script>
 </body>
 </html>

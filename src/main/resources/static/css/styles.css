@@ -11,13 +11,14 @@ body {
 
 .outer-container {
     display: flex;
-    align-items: flex-start;
-}
-.outer-padding {
-    margin-right: 20%;
+    align-items: center;
 }
 
-.container {
+.container2 {
+    margin-left: 10%;
+}
+
+.container, .extra-text {
     width: 600px;
     margin: 0 auto;
     background: #353838;
@@ -25,6 +26,10 @@ body {
     border: 3px solid #bf9045;
     border-radius: 1rem;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.extra-text {
+    margin-top: 3rem;
+    padding: 0.5rem 1rem;
 }
 
 .title {
@@ -247,6 +252,8 @@ button:hover {
     max-width: 15rem;
     padding: 1.2rem;
     margin-left: 10%;
+
+    align-self: flex-start;
 
     display: flex;
     flex-wrap: wrap;
