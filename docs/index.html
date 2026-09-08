@@ -39,33 +39,44 @@
             <p class="promo-title">Check out my mods on CurseForge!</p>
             <a class="mod-link" href="https://www.curseforge.com/minecraft/mc-mods/better-tools-and-armor" target="_blank">
                 <p>Better Tools and Armor</p>
-                <img src="https://media.forgecdn.net/attachments/1231/143/better-tools-and-armor-main-promo-image-12-0-png.png" alt="Better Tools and Armor">
+                <img src="images/better_tools_and_armor.png" alt="Better Tools and Armor">
             </a>
             <a class="mod-link" href="https://www.curseforge.com/minecraft/mc-mods/big-signs" target="_blank">
                 <p>Big Signs</p>
-                <img src="https://media.forgecdn.net/attachments/1039/41/big-signs-cover-photo.png" alt="Big Signs">
+                <img src="images/big_signs.png" alt="Big Signs">
             </a>
         </div>
 
-        <div class="container">
-            <div class="title">
-                <img src="images/schematic.png" alt="Schematic">
-                <p>Upload a Schematic (.nbt) File</p>
+        <div class="container2">
+            <div class="container">
+                <div class="title">
+                    <img src="images/schematic.png" alt="Schematic">
+                    <p>Upload a Schematic (.nbt) File</p>
+                </div>
+
+                <form id="uploadForm" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" name="file" accept=".nbt"/>
+                    <button type="submit">Upload</button>
+                </form>
+
+                <div id="result">
+                    <div id="loading-spinner" class="loading-spinner"></div>
+                    <div id="output"></div>
+                </div>
             </div>
-
-            <form id="uploadForm" enctype="multipart/form-data">
-                <input type="file" id="fileInput" name="file" accept=".nbt"/>
-                <button type="submit">Upload</button>
-            </form>
-
-            <div id="result">
-                <div id="loading-spinner" class="loading-spinner"></div>
-                <div id="output"></div>
+            <div class="extra-text">
+                <p>
+                    Find out which mods were used to build a schematic in Minecraft!
+                    <br>
+                    Only <strong>Create Mod</strong> schematics are accepted.
+                </p>
+                <p>
+                    Also checks camo blocks inside Framed Blocks and Copycat Blocks.
+                </p>
             </div>
         </div>
-
-        <span class="outer-padding"></span>
     </div>
+
     <script src="js/upload.js"></script>
 </body>
 </html>
